@@ -1,0 +1,2551 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-08-30T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v8.6.0",
+  "resources": [
+    {
+      "_id": "wrk_1ddf7bd0af81",
+      "_type": "workspace",
+      "parentId": null,
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "Shivam Travels API",
+      "description": "Complete backend API test suite \u2014 auth, bookings, pricing, drivers, vehicles, SEO, validation.",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_256f5ff3c7e4",
+      "_type": "environment",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:5000/api",
+        "admin_email": "admin@example.com",
+        "admin_password": "changeme",
+        "access_token": "",
+        "booking_id": "",
+        "pricing_id": "",
+        "driver_id": "",
+        "vehicle_id": "",
+        "vehicle_slug": ""
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url",
+          "admin_email",
+          "admin_password",
+          "access_token",
+          "booking_id",
+          "pricing_id",
+          "driver_id",
+          "vehicle_id",
+          "vehicle_slug"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1788076013208
+    },
+    {
+      "_id": "fld_2c867a2c3b49",
+      "_type": "request_group",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "1. Authentication",
+      "description": "Admin login, session, and password-reset flows.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1788076013209
+    },
+    {
+      "_id": "req_8c3f0226680b",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/login",
+      "name": "Login - Valid Credentials",
+      "description": "Expect 200 + accessToken. Copy the token into the access_token env var for subsequent admin requests.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.admin_email }}\",\n  \"password\": \"{{ _.admin_password }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013210,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_7c6b61ea5820",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/login",
+      "name": "Login - Invalid Password",
+      "description": "Expect 401 Unauthorized with a generic error message (must not reveal whether the email exists).",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.admin_email }}\",\n  \"password\": \"wrong-password\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013211,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_1da13367aa9e",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/login",
+      "name": "Login - Missing Fields",
+      "description": "Expect 400 Validation error \u2014 password is required.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.admin_email }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013212,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_cbd9f4fbd457",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/me",
+      "name": "Get Current Admin - Valid Token",
+      "description": "Expect 200 with the logged-in admin's profile.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013213,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_faeab45f7ed9",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/me",
+      "name": "Get Current Admin - No Token",
+      "description": "Expect 401 Not authenticated.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013214,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_5b807372c2c2",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/me",
+      "name": "Get Current Admin - Invalid Token",
+      "description": "Expect 401 Session expired or invalid token.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "invalid.token.value"
+      },
+      "metaSortKey": 1788076013215,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_6344a5d18cde",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/refresh",
+      "name": "Refresh Access Token",
+      "description": "Relies on the HttpOnly refresh cookie set at login. Expect 200 + new accessToken, or 401 if no valid session cookie.",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013216,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_10e3c775d6d3",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/logout",
+      "name": "Logout",
+      "description": "Expect 200 and the refresh cookie cleared/invalidated. Should succeed even with an expired access token.",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013217,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_588f68ea1ad8",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/forgot-password",
+      "name": "Forgot Password - Request OTP",
+      "description": "Expect 200 (generic response whether or not the email exists, to avoid account enumeration).",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.admin_email }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013218,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_cf97636bac5c",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/verify-otp",
+      "name": "Verify Reset OTP",
+      "description": "Expect 400/401 for a wrong OTP; 200 for a correct one (use a real OTP from email/logs in dev).",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.admin_email }}\",\n  \"otp\": \"000000\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013219,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_b83f172a77ee",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/resend-otp",
+      "name": "Resend Reset OTP",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.admin_email }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013220,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_65c4dff7f5d8",
+      "_type": "request",
+      "parentId": "fld_2c867a2c3b49",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/auth/admin/reset-password",
+      "name": "Reset Password With OTP",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.admin_email }}\",\n  \"otp\": \"000000\",\n  \"newPassword\": \"NewPassw0rd!\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013221,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_f76247eb5a3d",
+      "_type": "request_group",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "2. Bookings",
+      "description": "Booking CRUD, status transitions, pricing edits, driver assignment.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1788076013222
+    },
+    {
+      "_id": "req_24a06c500eb4",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings",
+      "name": "Create Booking (Admin)",
+      "description": "Expect 201 + created booking with a MongoDB _id. Copy that id into booking_id.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"customerName\": \"Test Customer\",\n  \"customerPhone\": \"9876543210\",\n  \"pickupLocation\": \"Mayiladuthurai\",\n  \"dropLocation\": \"Chennai\",\n  \"tripDate\": \"2026-09-15\",\n  \"tripTime\": \"09:00 AM\",\n  \"vehicleId\": \"{{ _.vehicle_id }}\",\n  \"basePrice\": 3500,\n  \"driverCharges\": 500,\n  \"extraCharges\": 0,\n  \"discount\": 0,\n  \"tax\": 0\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013223,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_cbf80e73ed75",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings",
+      "name": "List Bookings (Admin)",
+      "description": "Expect 200 + paginated list + pagination metadata.",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "page",
+          "value": "1"
+        },
+        {
+          "name": "limit",
+          "value": "20"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013224,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_f4d88d30c2b7",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings",
+      "name": "List Bookings - Filtered by Status",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "status",
+          "value": "Pending"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013225,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_99e628c3eed4",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings",
+      "name": "List Bookings - No Token (Unauthorized)",
+      "description": "Expect 401 \u2014 this route has no public access.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013226,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_2774649c2662",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings/{{ _.booking_id }}",
+      "name": "Get Booking Detail",
+      "description": "Expect 200 with the full booking document.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013227,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_0ed36dfe53f6",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings/000000000000000000000000",
+      "name": "Get Booking Detail - Non-existent ID",
+      "description": "Expect 404 Booking not found.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013228,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_8bb2752690bb",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings/not-a-valid-id",
+      "name": "Get Booking Detail - Invalid ID Format",
+      "description": "Expect 400/422 \u2014 malformed MongoDB ObjectId, not a 500 crash.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013229,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_054f3913ef26",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings/{{ _.booking_id }}",
+      "name": "Update Booking Status",
+      "description": "Expect 200 + updated status persisted.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"Confirmed\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013230,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_e50764164ff1",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings/{{ _.booking_id }}",
+      "name": "Update Booking - Invalid Status Value",
+      "description": "Expect 400/422 \u2014 status must be one of the enum values.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"NotARealStatus\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013231,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_a2e3dfa9935b",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings/{{ _.booking_id }}",
+      "name": "Assign Driver to Booking",
+      "description": "Expect 200 + driver populated on the booking.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"driverId\": \"{{ _.driver_id }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013232,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_35487bb38d31",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings/{{ _.booking_id }}",
+      "name": "Assign Driver - Non-existent Driver ID",
+      "description": "Expect 400/404 \u2014 must be rejected, not silently accepted.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"driverId\": \"000000000000000000000000\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013233,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_67b5e096f684",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings/{{ _.booking_id }}/pricing",
+      "name": "Update Booking Pricing",
+      "description": "Expect 200 + saved pricing. Re-run 'Get Booking Detail' afterward to confirm it persisted (not just an optimistic client value).",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"basePrice\": 4000,\n  \"driverCharges\": 600,\n  \"extraCharges\": 100,\n  \"discount\": 200,\n  \"tax\": 180,\n  \"totalAmount\": 4680\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013234,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_d6d6b6c68987",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings/{{ _.booking_id }}/pricing",
+      "name": "Update Booking Pricing - Negative Price (Validation)",
+      "description": "Expect 400/422 \u2014 negative prices must be rejected server-side.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"basePrice\": -500\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013235,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_4a4a1febe261",
+      "_type": "request",
+      "parentId": "fld_f76247eb5a3d",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings/{{ _.booking_id }}/pricing",
+      "name": "Update Booking Pricing - Unauthorized",
+      "description": "Expect 401 \u2014 no token supplied.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"basePrice\": 9999\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013236,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_e00f8550fbed",
+      "_type": "request_group",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "3. Vehicle Pricing",
+      "description": "Public pricing retrieval + admin-only pricing management.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1788076013237
+    },
+    {
+      "_id": "req_1fa8c9952df9",
+      "_type": "request",
+      "parentId": "fld_e00f8550fbed",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/pricing",
+      "name": "Get Pricing (Public)",
+      "description": "Expect 200 + current per-vehicle pricing. No auth required \u2014 this feeds the public homepage/booking page.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013238,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_7f98c359692d",
+      "_type": "request",
+      "parentId": "fld_e00f8550fbed",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/pricing",
+      "name": "Create Pricing (Admin)",
+      "description": "Expect 201. Copy the returned _id into pricing_id.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"vehicleId\": \"{{ _.vehicle_id }}\",\n  \"perKmRate\": 14,\n  \"baseFare\": 500,\n  \"minKm\": 130\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013239,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_3d20deb88b16",
+      "_type": "request",
+      "parentId": "fld_e00f8550fbed",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/pricing/{{ _.pricing_id }}",
+      "name": "Update Pricing (Admin)",
+      "description": "Expect 200. Then re-run 'Get Pricing (Public)' to confirm the new rate is actually returned, not cached/stale.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"perKmRate\": 15\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013240,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_e2b70d9bf9af",
+      "_type": "request",
+      "parentId": "fld_e00f8550fbed",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/pricing/{{ _.pricing_id }}",
+      "name": "Update Pricing - Unauthorized",
+      "description": "Expect 401 \u2014 pricing writes must never be publicly reachable.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"perKmRate\": 999\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013241,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_498b6247cc2f",
+      "_type": "request",
+      "parentId": "fld_e00f8550fbed",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/pricing/{{ _.pricing_id }}",
+      "name": "Update Pricing - Invalid Negative Rate",
+      "description": "Expect 400/422 \u2014 negative per-km rate must be rejected.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"perKmRate\": -10\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013242,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_0b090f0abf75",
+      "_type": "request",
+      "parentId": "fld_e00f8550fbed",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/pricing/{{ _.pricing_id }}",
+      "name": "Delete Pricing (Admin)",
+      "description": "Expect 200/204. Re-run 'Get Pricing (Public)' to confirm the entry is actually gone.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013243,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_78359b3a1875",
+      "_type": "request_group",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "4. Drivers",
+      "description": "Driver roster management + assignment support.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1788076013244
+    },
+    {
+      "_id": "req_885a54edc4fd",
+      "_type": "request",
+      "parentId": "fld_78359b3a1875",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/drivers",
+      "name": "List Drivers (Admin)",
+      "description": "Expect 200 + driver list, including availability status.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013245,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_9f59f0474e7e",
+      "_type": "request",
+      "parentId": "fld_78359b3a1875",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/drivers",
+      "name": "List Drivers - Unauthorized",
+      "description": "Expect 401.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013246,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_e284dab3f42c",
+      "_type": "request",
+      "parentId": "fld_78359b3a1875",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/drivers",
+      "name": "Create Driver",
+      "description": "Expect 201. Copy the returned _id into driver_id.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Test Driver\",\n  \"phone\": \"9123456789\",\n  \"licenseNumber\": \"TN00AB1234\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013247,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_63dc010d7f40",
+      "_type": "request",
+      "parentId": "fld_78359b3a1875",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/drivers/{{ _.driver_id }}",
+      "name": "Update Driver",
+      "description": "Expect 200 + updated availability.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"isAvailable\": false\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013248,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_7bfa1441f11b",
+      "_type": "request",
+      "parentId": "fld_78359b3a1875",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/drivers/000000000000000000000000",
+      "name": "Update Driver - Non-existent ID",
+      "description": "Expect 404.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"isAvailable\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013249,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_d2018318fb1c",
+      "_type": "request",
+      "parentId": "fld_78359b3a1875",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/drivers/{{ _.driver_id }}",
+      "name": "Delete Driver",
+      "description": "Expect 200/204. Confirm with 'List Drivers' afterward that the driver no longer appears.",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013250,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_eb89ecbff36f",
+      "_type": "request_group",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "5. Vehicles",
+      "description": "Public vehicle catalog + admin fleet management.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1788076013251
+    },
+    {
+      "_id": "req_a6ddddda97ed",
+      "_type": "request",
+      "parentId": "fld_eb89ecbff36f",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/vehicles",
+      "name": "List Vehicles (Public)",
+      "description": "Expect 200 + active vehicles only.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013252,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_01410a2263e0",
+      "_type": "request",
+      "parentId": "fld_eb89ecbff36f",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/vehicles",
+      "name": "List All Vehicles (Admin view)",
+      "description": "Expect 200 including inactive vehicles, for the Admin panel dropdowns.",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "all",
+          "value": "true"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013253,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_2ad3f9762747",
+      "_type": "request",
+      "parentId": "fld_eb89ecbff36f",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/vehicles/{{ _.vehicle_slug }}",
+      "name": "Get Vehicle By Slug",
+      "description": "Expect 200 + full vehicle detail used by the public VehicleDetail page.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013254,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_746a2e93e0e6",
+      "_type": "request",
+      "parentId": "fld_eb89ecbff36f",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/vehicles",
+      "name": "Create Vehicle (Admin)",
+      "description": "Expect 201. Copy _id/slug into vehicle_id/vehicle_slug.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": {\n    \"en\": \"Test Sedan\",\n    \"ta\": \"\"\n  },\n  \"category\": \"Sedan\",\n  \"slug\": \"test-sedan\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013255,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_f8f5124a72dd",
+      "_type": "request",
+      "parentId": "fld_eb89ecbff36f",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/vehicles/{{ _.vehicle_id }}",
+      "name": "Update Vehicle",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"Available\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013256,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_991a2b0fa364",
+      "_type": "request",
+      "parentId": "fld_eb89ecbff36f",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/vehicles/{{ _.vehicle_id }}/toggle-active",
+      "name": "Toggle Vehicle Active",
+      "description": "Expect 200 + isActive flipped. Confirm the vehicle disappears from the public list when deactivated.",
+      "method": "PATCH",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013257,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_52ee34e73a07",
+      "_type": "request",
+      "parentId": "fld_eb89ecbff36f",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/vehicles/reorder",
+      "name": "Reorder Vehicles",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"order\": [\n    \"{{ _.vehicle_id }}\"\n  ]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013258,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_7b412581f8c4",
+      "_type": "request",
+      "parentId": "fld_eb89ecbff36f",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/vehicles/{{ _.vehicle_id }}",
+      "name": "Delete Vehicle",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013259,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_a3cf6f26b9c9",
+      "_type": "request_group",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "6. SEO Management",
+      "description": "Admin-managed page SEO overrides \u2014 new in this delivery.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1788076013260
+    },
+    {
+      "_id": "req_276e0b960266",
+      "_type": "request",
+      "parentId": "fld_a3cf6f26b9c9",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/seo/settings",
+      "name": "Get Public SEO Settings",
+      "description": "Expect 200 + a map of every static page's SEO fields (blank until an admin configures them). No auth required \u2014 this is exactly what the public pages render into <head>.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013261,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_f296f0ef26c7",
+      "_type": "request",
+      "parentId": "fld_a3cf6f26b9c9",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/seo/settings/home",
+      "name": "Update Page SEO - Home (Admin)",
+      "description": "Expect 200 + saved doc. Then GET /seo/settings again to confirm persistence, and open the public homepage to confirm the new title/description actually render.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": {\n    \"en\": \"Shivam Travels \\u2014 Car Rental in Mayiladuthurai\",\n    \"ta\": \"\"\n  },\n  \"metaDescription\": {\n    \"en\": \"Book a car with driver in Mayiladuthurai.\",\n    \"ta\": \"\"\n  },\n  \"ogImage\": \"https://example.com/og-home.jpg\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013262,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_492615621cfa",
+      "_type": "request",
+      "parentId": "fld_a3cf6f26b9c9",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/seo/settings/home",
+      "name": "Update Page SEO - Unauthorized",
+      "description": "Expect 401 \u2014 no token supplied.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": {\n    \"en\": \"Hacked title\",\n    \"ta\": \"\"\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013263,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_d5994fb8be42",
+      "_type": "request",
+      "parentId": "fld_a3cf6f26b9c9",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/seo/settings/not-a-real-page",
+      "name": "Update Page SEO - Unknown Page Name",
+      "description": "Expect 400 \u2014 page must be one of the known SEO_PAGES values.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": {\n    \"en\": \"x\",\n    \"ta\": \"\"\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013264,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_93c6a381cefa",
+      "_type": "request",
+      "parentId": "fld_a3cf6f26b9c9",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/seo/settings/about",
+      "name": "Update Page SEO - Invalid OG Image URL",
+      "description": "Expect 422 \u2014 ogImage must be a valid http(s) URL.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"ogImage\": \"not a url\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013265,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_9a40016e3826",
+      "_type": "request",
+      "parentId": "fld_a3cf6f26b9c9",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/seo/settings/about",
+      "name": "Update Page SEO - Description Too Long",
+      "description": "Expect 422 \u2014 exceeds the 320-character server-side bound.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"metaDescription\": {\n    \"en\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n    \"ta\": \"\"\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013266,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_6fa55cb5eb16",
+      "_type": "request",
+      "parentId": "fld_a3cf6f26b9c9",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/seo/sitemap.xml",
+      "name": "Get Sitemap.xml",
+      "description": "Expect 200, Content-Type application/xml, listing all active static + vehicle URLs.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013267,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_fd2c2ca854f5",
+      "_type": "request",
+      "parentId": "fld_a3cf6f26b9c9",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/seo/robots.txt",
+      "name": "Get robots.txt",
+      "description": "Expect 200, text/plain, disallowing the real admin path and /api/.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013268,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_8f8440c2a1c9",
+      "_type": "request_group",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "7. Business Settings",
+      "description": "Header/footer/contact info singleton.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1788076013269
+    },
+    {
+      "_id": "req_7da19e3ab1a1",
+      "_type": "request",
+      "parentId": "fld_8f8440c2a1c9",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/business",
+      "name": "Get Business Settings (Public)",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013270,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_bac8e04125b5",
+      "_type": "request",
+      "parentId": "fld_8f8440c2a1c9",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/business",
+      "name": "Update Business Settings (Admin)",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"phone\": \"+91 98765 43210\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013271,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_20fe325ae763",
+      "_type": "request",
+      "parentId": "fld_8f8440c2a1c9",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/business",
+      "name": "Update Business Settings - Unauthorized",
+      "description": "Expect 401.",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"phone\": \"+91 00000 00000\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013272,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_d919a0b8153b",
+      "_type": "request_group",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "8. Admin Users",
+      "description": "Staff account management \u2014 Administrator role only.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1788076013273
+    },
+    {
+      "_id": "req_d8a99f7ed253",
+      "_type": "request",
+      "parentId": "fld_d919a0b8153b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/admin/users",
+      "name": "List Admin Users",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013274,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_cce65502ef27",
+      "_type": "request",
+      "parentId": "fld_d919a0b8153b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/admin/users",
+      "name": "List Admin Users - Non-Administrator Role",
+      "description": "Expect 403 \u2014 requireRole('Administrator') must reject other roles.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.non_admin_access_token }}"
+      },
+      "metaSortKey": 1788076013275,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_1c892c507d6f",
+      "_type": "request",
+      "parentId": "fld_d919a0b8153b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/admin/users",
+      "name": "Create Admin User",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Staff User\",\n  \"email\": \"staff@example.com\",\n  \"password\": \"TempPassw0rd!\",\n  \"role\": \"Staff\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013276,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_85e30de028e0",
+      "_type": "request",
+      "parentId": "fld_d919a0b8153b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/admin/users/{{ _.admin_user_id }}/toggle-active",
+      "name": "Toggle Admin User Active",
+      "description": "",
+      "method": "PATCH",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013277,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_31bbd000ef30",
+      "_type": "request",
+      "parentId": "fld_d919a0b8153b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/admin/users/{{ _.admin_user_id }}",
+      "name": "Delete Admin User",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013278,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_62cc0895cb30",
+      "_type": "request_group",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "9. Dashboard",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1788076013279
+    },
+    {
+      "_id": "req_7222a26186d8",
+      "_type": "request",
+      "parentId": "fld_62cc0895cb30",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/dashboard",
+      "name": "Get Dashboard Stats (Admin)",
+      "description": "Expect 200 + real aggregate counts (never mock numbers).",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013280,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_b5c5e852b0b6",
+      "_type": "request",
+      "parentId": "fld_62cc0895cb30",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/dashboard",
+      "name": "Get Dashboard Stats - Unauthorized",
+      "description": "Expect 401.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013281,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_444e1813ff5b",
+      "_type": "request_group",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "10. Enquiries, FAQ, Services, Content, Translate",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1788076013282
+    },
+    {
+      "_id": "req_b5715a6eaa40",
+      "_type": "request",
+      "parentId": "fld_444e1813ff5b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/enquiries",
+      "name": "Create Enquiry (Public)",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Test User\",\n  \"mobile\": \"9876543210\",\n  \"message\": \"Need an outstation cab.\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013283,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_a077e5816b54",
+      "_type": "request",
+      "parentId": "fld_444e1813ff5b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/enquiries",
+      "name": "List Enquiries (Admin)",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013284,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_4ce54e38c5ef",
+      "_type": "request",
+      "parentId": "fld_444e1813ff5b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/faqs",
+      "name": "List FAQs (Public)",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013285,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_8215c50cbc5c",
+      "_type": "request",
+      "parentId": "fld_444e1813ff5b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/faqs/{{ _.faq_id }}",
+      "name": "Update FAQ (Admin)",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"question\": {\n    \"en\": \"Updated question?\",\n    \"ta\": \"\"\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013286,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_8ca81fcfc4c9",
+      "_type": "request",
+      "parentId": "fld_444e1813ff5b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/services",
+      "name": "List Services (Public)",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013287,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_9d59022ee220",
+      "_type": "request",
+      "parentId": "fld_444e1813ff5b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/content/home",
+      "name": "Get Content Section (Public)",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013288,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_0a1557b9af34",
+      "_type": "request",
+      "parentId": "fld_444e1813ff5b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/content/home",
+      "name": "Update Content Section (Admin)",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"content\": {\n    \"hero\": {\n      \"title\": {\n        \"en\": \"Updated\",\n        \"ta\": \"\"\n      }\n    }\n  }\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013289,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_d7bba1246d49",
+      "_type": "request",
+      "parentId": "fld_444e1813ff5b",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/translate",
+      "name": "Translate Text (Admin)",
+      "description": "Returns 503 TRANSLATION_NOT_CONFIGURED if no TRANSLATION_PROVIDER/API key is set \u2014 that is expected/correct behavior, not a bug.",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"text\": \"Welcome to Shivam Travels\",\n  \"source\": \"en\",\n  \"target\": \"ta\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.access_token }}"
+      },
+      "metaSortKey": 1788076013290,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "fld_1f3c0086d94a",
+      "_type": "request_group",
+      "parentId": "wrk_1ddf7bd0af81",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "name": "11. Cross-cutting Validation & Auth Checks",
+      "description": "General-purpose checks the task's checklist calls out explicitly.",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 1788076013291
+    },
+    {
+      "_id": "req_11eac13ba16a",
+      "_type": "request",
+      "parentId": "fld_1f3c0086d94a",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/bookings",
+      "name": "Any Admin Route - Malformed Bearer Header",
+      "description": "Expect 401 \u2014 extractToken() only recognizes 'Bearer <token>'.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "NotBearer sometoken"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013292,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_b26b2a7d1b8a",
+      "_type": "request",
+      "parentId": "fld_1f3c0086d94a",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/health",
+      "name": "Health Check",
+      "description": "Expect 200 { success: true } \u2014 used to confirm the server is reachable at all before running the rest of this collection.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013293,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    },
+    {
+      "_id": "req_e17083eac1ad",
+      "_type": "request",
+      "parentId": "fld_1f3c0086d94a",
+      "modified": 1788076013208,
+      "created": 1788076013208,
+      "url": "{{ _.base_url }}/this-route-does-not-exist",
+      "name": "Unknown Route (404 handler)",
+      "description": "Expect 404 with the app's standard JSON error shape, not an HTML stack trace.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1788076013294,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global"
+    }
+  ]
+}

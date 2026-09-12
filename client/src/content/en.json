@@ -1,0 +1,246 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "cars": "Cars",
+    "booking": "Booking",
+    "about": "About Us",
+    "contact": "Contact",
+    "faq": "FAQ"
+  },
+  "buttons": {
+    "callNow": "Call Now",
+    "whatsapp": "WhatsApp",
+    "enquireNow": "Enquire Now",
+    "learnMore": "Learn More",
+    "bookNow": "Book Now",
+    "viewDetails": "View Details",
+    "translate": "Translate",
+    "submit": "Submit",
+    "login": "Login",
+    "signup": "Sign up and get started.",
+    "createAccount": "Create Account",
+    "createNewAccount": "Create New Account",
+    "backToLogin": "Back to Login",
+    "sendResetLink": "Send Reset Link",
+    "verifyOtp": "Verify OTP",
+    "resendOtp": "Resend OTP",
+    "resetPassword": "Reset Password",
+    "proceedToConfirmBooking": "Proceed to Confirm Booking"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Safe Journey, Happy Memories",
+      "title": "SHIVAM TRAVELS",
+      "subtitle": "Your Journey, Our Responsibility",
+      "description": "Shivam Travels provides safe, reliable and comfortable car with driver and travel services in and around Mayiladuthurai."
+    },
+    "stats": {
+      "totalCars": "Total Cars",
+      "carsAvailableLabel": "Cars Available",
+      "carModels": "Car Models",
+      "modelsLabel": "Models",
+      "availableNow": "Available Now",
+      "carAvailableLabel": "Car Available",
+      "notAvailable": "Not Available",
+      "carNotAvailableLabel": "Car Not Available"
+    },
+    "pricing": {
+      "title": "Our Pricing",
+      "perKm": "/ km",
+      "minimumPrefix": "Minimum",
+      "minimumSuffix": "km / day",
+      "extraPrefix": "Extra",
+      "disclaimer": "* Driver allowance and toll charges extra"
+    },
+    "services": {
+      "title": "Our Services"
+    },
+    "catalog": {
+      "title": "Explore Our Car Categories",
+      "subtitle": "Pick a category to see matching cars, pricing and availability.",
+      "cta": "View Car Catalog",
+      "exploreCta": "Explore Cars",
+      "available": "Available",
+      "notAvailable": "Not Available",
+      "emptyTitle": "Categories are being updated",
+      "emptyMessage": "Our vehicle categories are being updated. Please check back soon."
+    }
+  },
+  "about": {
+    "eyebrow": "About Shivam Travels",
+    "title": "Your Journey,",
+    "titleHighlight": "Our Responsibility",
+    "description": "Shivam Travels is a trusted car with driver and travel service provider based in Mayiladuthurai. We are committed to offering safe, comfortable and reliable travel experiences at affordable prices. Whether it's a family trip, airport transfer, business travel or outstation journey, we make every ride special.",
+    "whyChooseTitle": "Why Choose",
+    "whyChooseHighlight": "Shivam Travels?",
+    "features": {
+      "safe": {
+        "title": "Safe & Reliable",
+        "description": "Your safety is our top priority. We ensure a secure and reliable journey every time."
+      },
+      "drivers": {
+        "title": "Professional Drivers",
+        "description": "Our experienced and courteous drivers ensure a smooth and pleasant ride for you."
+      },
+      "cars": {
+        "title": "Well Maintained Cars",
+        "description": "Clean, comfortable and well maintained vehicles for a worry-free travel experience."
+      },
+      "pricing": {
+        "title": "Affordable Pricing",
+        "description": "Best travel experience at competitive and transparent prices with no hidden charges."
+      }
+    },
+    "stats": {
+      "happyCustomers": "Happy Customers",
+      "successfulTrips": "Successful Trips",
+      "yearsExperience": "Years of Experience",
+      "outstationDestinations": "Outstation Destinations"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To provide safe, reliable and affordable travel services with excellent customer satisfaction."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the most trusted travel partner in Mayiladuthurai and beyond."
+    },
+    "ctaTitle": "Ready to Travel with Us?",
+    "ctaDescription": "Book your ride now and enjoy a comfortable journey with Shivam Travels."
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "loginSubtitle": "Please enter your details to sign in",
+    "customerLogin": "Customer Login",
+    "adminLogin": "Admin Login",
+    "emailOrMobile": "Email or Mobile Number",
+    "emailOrMobilePlaceholder": "Enter your email or mobile number",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "Forgot Password?",
+    "dontHaveAccount": "Don't have an account?",
+    "signupTitle": "Create New Account",
+    "signupSubtitle": "Fill in your details below to create your account",
+    "fullName": "Full Name",
+    "username": "Username",
+    "emailAddress": "Email Address",
+    "mobileNumber": "Mobile Number",
+    "confirmPassword": "Confirm Password",
+    "passwordRules": "Password must contain:",
+    "ruleLength": "At least 8 characters",
+    "ruleUppercase": "At least one uppercase letter",
+    "ruleNumber": "At least one number",
+    "ruleSpecial": "At least one special character",
+    "agreeToTerms": "I agree to the Terms & Conditions and Privacy Policy",
+    "alreadyHaveAccount": "Already have an account?",
+    "forgotTitle": "Forgot Password?",
+    "forgotSubtitle": "No worries! Enter your registered email or mobile number and we'll send you instructions to reset your password.",
+    "rememberPassword": "Remember your password?",
+    "otpTitle": "Verify OTP",
+    "otpSubtitle": "We have sent a 6-digit OTP to your registered email or mobile number.",
+    "otpExpiry": "OTP will expire in",
+    "didntReceiveOtp": "Didn't receive the OTP?",
+    "resetTitle": "Create New Password",
+    "resetSubtitle": "Enter your new password below to reset your account password.",
+    "newPassword": "New Password",
+    "reenterPassword": "Re-enter New Password",
+    "hidePassword": "Hide password",
+    "showPassword": "Show password",
+    "signingIn": "Signing in…",
+    "staffNotice": "This login is for Shivam Travels staff only.",
+    "emailRequired": "Email is required.",
+    "otpSentSuccess": "An OTP has been sent to your registered email or mobile number.",
+    "sending": "Sending…",
+    "passwordMismatch": "Passwords do not match.",
+    "passwordRequirementsUnmet": "Password does not meet the requirements above.",
+    "resetSuccess": "Your password has been reset successfully.",
+    "resetting": "Resetting…",
+    "otpIncomplete": "Please enter the full 6-digit code.",
+    "otpExpired": "This OTP has expired. Please request a new one.",
+    "otpResentSuccess": "A new code has been sent.",
+    "registeredEmailFallback": "your registered email",
+    "change": "Change",
+    "verifying": "Verifying…",
+    "backToForgotPassword": "Back to Forgot Password"
+  },
+  "booking": {
+    "title": "Book Your Ride",
+    "featureSafe": "Safe & Reliable",
+    "featureOnTime": "On-time Guarantee",
+    "featureDrivers": "Professional Drivers",
+    "sectionTitle": "Booking Details",
+    "sectionSubtitle": "Fill in your trip details to book your ride.",
+    "tripType": "Trip Type",
+    "pickupDate": "Pickup Date",
+    "pickupTime": "Pickup Time",
+    "pickupLocation": "Pickup Location",
+    "pickupLocationPlaceholder": "Enter pickup location",
+    "dropLocation": "Drop Location",
+    "dropLocationPlaceholder": "Enter drop location",
+    "passengers": "Passenger(s)",
+    "luggage": "Luggage",
+    "phoneNumber": "Phone Number",
+    "fullNamePlaceholder": "Enter your full name",
+    "emailPlaceholder": "Enter your email",
+    "additionalRequirements": "Additional Requirements (Optional)",
+    "additionalRequirementsPlaceholder": "Enter any special requests...",
+    "securityNote": "Your information is secure with us. We never share your details.",
+    "selectVehicle": "Select Vehicle",
+    "selectVehicleSubtitle": "Choose your preferred car",
+    "priceSummary": "Price Summary",
+    "baseFare": "Base Fare (Estimated)",
+    "driverAllowance": "Driver Allowance",
+    "tollAndParking": "Toll & Parking",
+    "totalEstimated": "Total Estimated",
+    "noAdvancePayment": "No advance payment required",
+    "bookingType": "Booking Type",
+    "oneWay": "One Way",
+    "roundTrip": "Round Trip",
+    "returnDate": "Return Date",
+    "returnTime": "Return Time",
+    "successBooking": "Thank you! Your booking request has been received. Our team will contact you shortly to confirm.",
+    "vehicleUnavailable": "The selected vehicle is currently not available. Please choose a different vehicle.",
+    "pricingEstimateNote": "Final pricing is confirmed by our team based on actual trip details.",
+    "livePriceLoading": "Calculating price..."
+  },
+  "footer": {
+    "description": "Shivam Travels provides safe, reliable and comfortable car with driver and travel services in and around Mayiladuthurai.",
+    "quickLinks": "Quick Links",
+    "ourServices": "Our Services",
+    "contactUs": "Contact Us",
+    "followUs": "Follow Us",
+    "copyright": "© 2025 Shivam Travels. All Rights Reserved."
+  },
+  "vehicles": {
+    "eyebrow": "Our Premium Fleet",
+    "subtitle": "Choose from our clean, comfortable, and well-maintained vehicles for a safe journey."
+  },
+  "contact": {
+    "eyebrow": "Get In Touch",
+    "subtitle": "Have questions or need to book a custom itinerary? Reach out to us anytime."
+  },
+  "faq": {
+    "eyebrow": "Have Questions?",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the questions we hear most often about booking, pricing and our vehicles.",
+    "emptyTitle": "No FAQs published yet",
+    "emptyMessage": "Check back soon, or call us and we'll answer any question directly.",
+    "stillHaveQuestions": "Still have a question?",
+    "contactPrompt": "Can't find the answer you're looking for? Reach out to our team directly."
+  },
+  "forms": {
+    "requiredField": "This field is required.",
+    "invalidEmail": "Please enter a valid email address.",
+    "invalidMobile": "Please enter a valid mobile number.",
+    "successEnquiry": "Thank you! We have received your enquiry and will contact you shortly.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "loading": "Loading...",
+    "invalidPickupDate": "Pickup date cannot be in the past.",
+    "invalidReturnDate": "Return date must be on or after the pickup date.",
+    "invalidReturnTime": "Return time must be after the pickup time on the same day.",
+    "emailRequired": "Email is required.",
+    "emailInvalid": "Enter a valid email address.",
+    "passwordRequired": "Password is required."
+  }
+}

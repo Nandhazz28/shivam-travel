@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /secure-admin
+Disallow: /api/
+
+Sitemap: https://shivam-travels-three.vercel.app/sitemap.xml
